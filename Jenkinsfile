@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'docr-agent' }
+    agent { label 'do-agent' }
 
     environment {
         core_banking_service = "core-banking-service"

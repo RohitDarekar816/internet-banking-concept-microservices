@@ -75,9 +75,7 @@ pipeline {
                     script {
                         sh """
                         docker build -t ghcr.io/rohitdarekar816/core-banking-service:latest .
-                        docker run --rm -v /var/run/docker.sock:/var/run/docker.sock dslim/slim build ghcr.io/rohitdarekar816/core-banking-service:latest
-                        docker tag ghcr.io/rohitdarekar816/core-banking-service.slim:latest ghcr.io/rohitdarekar816/core-banking-service:slim
-                        docker push ghcr.io/rohitdarekar816/core-banking-service:slim
+                        docker push ghcr.io/rohitdarekar816/core-banking-service:latest
                         """
                     }   
                 }
@@ -93,9 +91,7 @@ pipeline {
                     script {
                         sh """
                         docker build -t ghcr.io/rohitdarekar816/internet-banking-api-gateway:latest .
-                        docker run --rm -v /var/run/docker.sock:/var/run/docker.sock dslim/slim build ghcr.io/rohitdarekar816/internet-banking-api-gateway:latest
-                        docker tag ghcr.io/rohitdarekar816/internet-banking-api-gateway.slim:latest ghcr.io/rohitdarekar816/internet-banking-api-gateway:slim
-                        docker push ghcr.io/rohitdarekar816/internet-banking-api-gateway:slim
+                        docker push ghcr.io/rohitdarekar816/internet-banking-api-gateway:latest
                         """
                     }
                 }
@@ -111,9 +107,7 @@ pipeline {
                     script {
                         sh """
                         docker build -t ghcr.io/rohitdarekar816/internet-banking-config-server:latest .
-                        docker run --rm -v /var/run/docker.sock:/var/run/docker.sock dslim/slim build ghcr.io/rohitdarekar816/internet-banking-config-server:latest
-                        docker tag ghcr.io/rohitdarekar816/internet-banking-config-server.slim:latest ghcr.io/rohitdarekar816/internet-banking-config-server:slim
-                        docker push ghcr.io/rohitdarekar816/internet-banking-config-server:slim
+                        docker push ghcr.io/rohitdarekar816/internet-banking-config-server:latest
                         """
                     }
                 }
@@ -129,9 +123,7 @@ pipeline {
                     script {
                         sh """
                         docker build -t ghcr.io/rohitdarekar816/internet-banking-fund-transfer-service:latest .
-                        docker run --rm -v /var/run/docker.sock:/var/run/docker.sock dslim/slim build ghcr.io/rohitdarekar816/internet-banking-fund-transfer-service:latest
-                        docker tag ghcr.io/rohitdarekar816/internet-banking-fund-transfer-service.slim:latest ghcr.io/rohitdarekar816/internet-banking-fund-transfer-service:slim
-                        docker push ghcr.io/rohitdarekar816/internet-banking-fund-transfer-service:slim
+                        docker push ghcr.io/rohitdarekar816/internet-banking-fund-transfer-service:latest
                         """
                     }
                 }
@@ -147,9 +139,7 @@ pipeline {
                     script {
                         sh """
                         docker build -t ghcr.io/rohitdarekar816/internet-banking-service-registry:latest .
-                        docker run --rm -v /var/run/docker.sock:/var/run/docker.sock dslim/slim build ghcr.io/rohitdarekar816/internet-banking-service-registry:latest
-                        docker tag ghcr.io/rohitdarekar816/internet-banking-service-registry.slim:latest ghcr.io/rohitdarekar816/internet-banking-service-registry:slim
-                        docker push ghcr.io/rohitdarekar816/internet-banking-service-registry:slim
+                        docker push ghcr.io/rohitdarekar816/internet-banking-service-registry:latest
                         """
                     }
                 }
@@ -165,9 +155,7 @@ pipeline {
                     script {
                         sh """
                         docker build -t ghcr.io/rohitdarekar816/internet-banking-user-service:latest .
-                        docker run --rm -v /var/run/docker.sock:/var/run/docker.sock dslim/slim build ghcr.io/rohitdarekar816/internet-banking-user-service:latest
-                        docker tag ghcr.io/rohitdarekar816/internet-banking-user-service.slim:latest ghcr.io/rohitdarekar816/internet-banking-user-service:slim
-                        docker push ghcr.io/rohitdarekar816/internet-banking-user-service:slim
+                        docker push ghcr.io/rohitdarekar816/internet-banking-user-service:latest
                         """
                     }
                 }
@@ -183,9 +171,7 @@ pipeline {
                     script {
                         sh """
                         docker build -t ghcr.io/rohitdarekar816/internet-banking-utility-payment-service:latest .
-                        docker run --rm -v /var/run/docker.sock:/var/run/docker.sock dslim/slim build ghcr.io/rohitdarekar816/internet-banking-utility-payment-service:latest
-                        docker tag ghcr.io/rohitdarekar816/internet-banking-utility-payment-service.slim:latest ghcr.io/rohitdarekar816/internet-banking-utility-payment-service:slim
-                        docker push ghcr.io/rohitdarekar816/internet-banking-utility-payment-service:slim
+                        docker push ghcr.io/rohitdarekar816/internet-banking-utility-payment-service:latest
                         """
                     }
                 }

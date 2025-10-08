@@ -23,6 +23,9 @@ pipeline {
         stage('Detect changes') {
             steps {
                 script {
+                    // compute commit hash for tagging images
+                    env.COMMIT_SHA = sh(script: "git rev-parse --short=12 HEAD", returnStdout: true).trim()
+
                     def core_banking_service_changed = sh(script: "git diff --name-only HEAD~1 HEAD | grep '${core_banking_service}' || true", returnStdout: true).trim()
                     def internet_banking_api_gateway_changed = sh(script: "git diff --name-only HEAD~1 HEAD | grep '${internet_banking_api_gateway}' || true", returnStdout: true).trim()
                     def internet_banking_config_server_changed = sh(script: "git diff --name-only HEAD~1 HEAD | grep '${internet_banking_config_server}' || true", returnStdout: true).trim()
@@ -51,6 +54,7 @@ pipeline {
                     ].any { it == 'true' }
                     env.ANY_SERVICE_CHANGED = anyChanged ? 'true' : 'false'
                     echo "ANY_SERVICE_CHANGED=${env.ANY_SERVICE_CHANGED}"
+                    echo "COMMIT_SHA=${env.COMMIT_SHA}"
                 }
             }
         }
@@ -90,8 +94,9 @@ pipeline {
                 dir('core-banking-service') {
                     script {
                         sh """
-                        docker build -t ghcr.io/rohitdarekar816/core-banking-service:latest .
+                        docker build -t ghcr.io/rohitdarekar816/core-banking-service:latest -t ghcr.io/rohitdarekar816/core-banking-service:${COMMIT_SHA} .
                         docker push ghcr.io/rohitdarekar816/core-banking-service:latest
+                        docker push ghcr.io/rohitdarekar816/core-banking-service:${COMMIT_SHA}
                         """
                     }   
                 }
@@ -106,8 +111,9 @@ pipeline {
                 dir('internet-banking-api-gateway') {
                     script {
                         sh """
-                        docker build -t ghcr.io/rohitdarekar816/internet-banking-api-gateway:latest .
+                        docker build -t ghcr.io/rohitdarekar816/internet-banking-api-gateway:latest -t ghcr.io/rohitdarekar816/internet-banking-api-gateway:${COMMIT_SHA} .
                         docker push ghcr.io/rohitdarekar816/internet-banking-api-gateway:latest
+                        docker push ghcr.io/rohitdarekar816/internet-banking-api-gateway:${COMMIT_SHA}
                         """
                     }
                 }
@@ -122,8 +128,9 @@ pipeline {
                 dir('internet-banking-config-server') {
                     script {
                         sh """
-                        docker build -t ghcr.io/rohitdarekar816/internet-banking-config-server:latest .
+                        docker build -t ghcr.io/rohitdarekar816/internet-banking-config-server:latest -t ghcr.io/rohitdarekar816/internet-banking-config-server:${COMMIT_SHA} .
                         docker push ghcr.io/rohitdarekar816/internet-banking-config-server:latest
+                        docker push ghcr.io/rohitdarekar816/internet-banking-config-server:${COMMIT_SHA}
                         """
                     }
                 }
@@ -138,8 +145,9 @@ pipeline {
                 dir('internet-banking-fund-transfer-service') {
                     script {
                         sh """
-                        docker build -t ghcr.io/rohitdarekar816/internet-banking-fund-transfer-service:latest .
+                        docker build -t ghcr.io/rohitdarekar816/internet-banking-fund-transfer-service:latest -t ghcr.io/rohitdarekar816/internet-banking-fund-transfer-service:${COMMIT_SHA} .
                         docker push ghcr.io/rohitdarekar816/internet-banking-fund-transfer-service:latest
+                        docker push ghcr.io/rohitdarekar816/internet-banking-fund-transfer-service:${COMMIT_SHA}
                         """
                     }
                 }
@@ -154,8 +162,9 @@ pipeline {
                 dir('internet-banking-service-registry') {
                     script {
                         sh """
-                        docker build -t ghcr.io/rohitdarekar816/internet-banking-service-registry:latest .
+                        docker build -t ghcr.io/rohitdarekar816/internet-banking-service-registry:latest -t ghcr.io/rohitdarekar816/internet-banking-service-registry:${COMMIT_SHA} .
                         docker push ghcr.io/rohitdarekar816/internet-banking-service-registry:latest
+                        docker push ghcr.io/rohitdarekar816/internet-banking-service-registry:${COMMIT_SHA}
                         """
                     }
                 }
@@ -170,8 +179,9 @@ pipeline {
                 dir('internet-banking-user-service') {
                     script {
                         sh """
-                        docker build -t ghcr.io/rohitdarekar816/internet-banking-user-service:latest .
+                        docker build -t ghcr.io/rohitdarekar816/internet-banking-user-service:latest -t ghcr.io/rohitdarekar816/internet-banking-user-service:${COMMIT_SHA} .
                         docker push ghcr.io/rohitdarekar816/internet-banking-user-service:latest
+                        docker push ghcr.io/rohitdarekar816/internet-banking-user-service:${COMMIT_SHA}
                         """
                     }
                 }
@@ -186,8 +196,9 @@ pipeline {
                 dir('internet-banking-utility-payment-service') {
                     script {
                         sh """
-                        docker build -t ghcr.io/rohitdarekar816/internet-banking-utility-payment-service:latest .
+                        docker build -t ghcr.io/rohitdarekar816/internet-banking-utility-payment-service:latest -t ghcr.io/rohitdarekar816/internet-banking-utility-payment-service:${COMMIT_SHA} .
                         docker push ghcr.io/rohitdarekar816/internet-banking-utility-payment-service:latest
+                        docker push ghcr.io/rohitdarekar816/internet-banking-utility-payment-service:${COMMIT_SHA}
                         """
                     }
                 }

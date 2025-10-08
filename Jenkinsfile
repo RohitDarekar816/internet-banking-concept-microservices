@@ -38,11 +38,25 @@ pipeline {
                     env.INTERNET_BANKING_SERVICE_REGISTRY_CHANGED = internet_banking_service_registry_changed ? 'true' : 'false'
                     env.INTERNET_BANKING_USER_SERVICE_CHANGED = internet_banking_user_service_changed ? 'true' : 'false'
                     env.INTERNET_BANKING_UTILITY_PAYMENT_SERVICE_CHANGED = internet_banking_utility_payment_service_changed ? 'true' : 'false'
+
+                    // Global flag: any subfolder changed?
+                    def anyChanged = [
+                        env.CORE_BANKING_SERVICE_CHANGED,
+                        env.INTERNET_BANKING_API_GATEWAY_CHANGED,
+                        env.INTERNET_BANKING_CONFIG_SERVER_CHANGED,
+                        env.INTERNET_BANKING_FUND_TRANSFER_SERVICE_CHANGED,
+                        env.INTERNET_BANKING_SERVICE_REGISTRY_CHANGED,
+                        env.INTERNET_BANKING_USER_SERVICE_CHANGED,
+                        env.INTERNET_BANKING_UTILITY_PAYMENT_SERVICE_CHANGED
+                    ].any { it == 'true' }
+                    env.ANY_SERVICE_CHANGED = anyChanged ? 'true' : 'false'
+                    echo "ANY_SERVICE_CHANGED=${env.ANY_SERVICE_CHANGED}"
                 }
             }
         }
 
         stage('Start Notification') {
+            when { expression { return env.ANY_SERVICE_CHANGED == 'true' } }
             steps {
                 script {
                     sh "echo 'Starting the build process...'"
@@ -51,6 +65,7 @@ pipeline {
         }
 
         stage('Code scan') {
+            when { expression { return env.ANY_SERVICE_CHANGED == 'true' } }
             steps {
                 script {
                     sh "echo 'Running code scan...'"
@@ -59,6 +74,7 @@ pipeline {
         }
 
         stage('filesystem scan') {
+            when { expression { return env.ANY_SERVICE_CHANGED == 'true' } }
             steps {
                 script {
                     sh "echo 'Running filesystem scan...'"
